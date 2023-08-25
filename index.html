@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <body onload="loadDashboard()">
+    <script
+      defer
+      src="https://cdn-a.cumul.io/js/cumulio-dashboard/4.0.0/cumulio-dashboard.min.js"
+      charset="utf-8"
+    ></script>
+    <div id="dashboard-container">
+      <cumulio-dashboard id="cumulio-dashboard"></cumulio-dashboard>
+    </div>
+    <script>
+      const dashboardComponent = document.getElementById("cumulio-dashboard");
+      
+      function loadDashboard() {
+        /*const pathName = window.location.pathname;
+        
+        const pathElements = pathName.split('/');
+        const dashboardId = pathElements[pathElements.length - 1];*/
+        
+        const urlParams = new URLSearchParams(window.location.search);
+        
+        const dashboardId = urlParams.get('dashboardId');
+        
+        if (!dashboardId || dashboardId.length <= 0) {
+          console.log("No dashboard ID specified!");
+          return;
+        }
+        
+        const authKey = urlParams.get('key');
+        const authToken = urlParams.get('token');
+        
+        if (!authKey || authKey.length <= 0 || !authToken || authToken.length <= 0) {
+          console.log("No dashboard token specified!");
+          return;
+        }
+        
+        dashboardComponent.authKey = authKey;
+        dashboardComponent.authToken = authToken;
+        dashboardComponent.dashboardId = dashboardId;
+      }
+    </script>
+  </body>
+</html>
